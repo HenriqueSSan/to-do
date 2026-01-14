@@ -1,4 +1,5 @@
 import { useRef, useState, type ChangeEvent, type MouseEvent } from 'react';
+import { Icon } from '@iconify/react';
 
 interface Task {
   id: number;
@@ -123,7 +124,7 @@ export function IndexPage() {
                 }}
                 className='absolute top-6 right-6 h-[32px] w-[32px] cursor-pointer rounded-sm text-gray-400 hover:bg-gray-200'
               >
-                {/* <Icon icon='mingcute:close-medium-line' className='text-3xl' /> */}
+                <Icon icon='mingcute:close-medium-line' className='text-3xl' />
                 <span className='sr-only'>Close</span>
               </button>
             </div>
@@ -166,7 +167,9 @@ export function IndexPage() {
                       className='w-full appearance-none rounded-lg px-4 min-h-[40px] border-gray-300 bg-gray-100'
                     />
                   </label>
+                </fieldset>
 
+                <fieldset>
                   <label>
                     <span className='mb-1.5 inline-block text-sm font-medium'>
                       Description
@@ -210,8 +213,10 @@ export function IndexPage() {
               onSubmit={e => {
                 e.preventDefault();
 
-                addedNewTodo({ title: titleInputValue });
-                setTitleInputValue('');
+                if (titleInputValue.length > 0) {
+                  addedNewTodo({ title: titleInputValue });
+                  setTitleInputValue('');
+                }
               }}
               ref={formRef}
               action=''
@@ -232,9 +237,10 @@ export function IndexPage() {
                     />
                     <button
                       type='submit'
-                      className='shrink-0 cursor-pointer px-4 rounded-r-lg hover:bg-gray-300 text-sm font-bold h-full min-h-[40px]'
+                      className='shrink-0 flex items-center gap-2 cursor-pointer px-4 rounded-r-lg hover:bg-gray-300 text-sm font-bold h-full min-h-[40px]'
                     >
-                      Added
+                      <Icon icon='mingcute:add-line' className='text-lg' />
+                      <span>Added</span>
                     </button>
                   </div>
                 </label>
@@ -270,11 +276,21 @@ export function IndexPage() {
                   </div>
                 </div>
                 <div className='flex items-stretch gap-2'>
-                  <button data-todo-id={id} onClick={editByDataTodoId}>
-                    <span>Edit</span>
+                  <button
+                    className='w-[32px] h-[32px] flex items-center justify-center rounded-lg cursor-pointer hover:bg-gray-200 transition-all'
+                    data-todo-id={id}
+                    onClick={editByDataTodoId}
+                  >
+                    <Icon icon='mingcute:pencil-line' className='text-lg' />
+                    <span className='sr-only'>Edit</span>
                   </button>
-                  <button data-todo-id={id} onClick={delByDataTodoId}>
-                    <span>Delete</span>
+                  <button
+                    className='text-red-500 w-[32px] h-[32px] flex items-center justify-center rounded-lg cursor-pointer hover:bg-gray-200 transition-all'
+                    data-todo-id={id}
+                    onClick={delByDataTodoId}
+                  >
+                    <Icon icon='mingcute:delete-2-line' className='text-lg' />
+                    <span className='sr-only'>Delete</span>
                   </button>
                 </div>
               </div>
@@ -285,3 +301,6 @@ export function IndexPage() {
     </>
   );
 }
+
+
+
