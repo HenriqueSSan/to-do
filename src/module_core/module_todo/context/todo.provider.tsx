@@ -1,8 +1,9 @@
 import { useState, type ChangeEvent, type MouseEvent, type PropsWithChildren } from 'react';
 import { TodoContext, type Task } from './todo.context';
+import { useLocalStorage } from '../hook/local-storage.hook';
 
 export function TodoProvider({ children }: PropsWithChildren) {
-  const [todos, setTodos] = useState<Task[]>([{ id: 1, title: 'To-do 1', completed: true }]);
+  const [todos, setTodos] = useLocalStorage<Task[]>('tasks', []);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [editId, setEditId] = useState<number | null>(null);
 
@@ -11,9 +12,9 @@ export function TodoProvider({ children }: PropsWithChildren) {
     description: '',
   });
 
-  const addedNewTodo = (params: { title: string }) =>
+  const addedNewTodo = (params: { title: string }) => {
     setTodos(oldTodos => [...oldTodos, { id: oldTodos.length + 1, title: params.title, completed: false }]);
-
+  };
   const toggleCompletedTodo = (currentTodo: { id: number }) => {
     setTodos(oldTodos =>
       oldTodos.map(todo => (todo.id === currentTodo.id ? { ...todo, completed: !todo.completed } : todo)),
