@@ -8,9 +8,9 @@ export function Todo() {
   const [titleInputValue, setTitleInputValue] = useState('');
 
   const formRef = useRef<HTMLFormElement | null>(null);
-  const todoContext = useTasks();
+  const taskContext = useTasks();
 
-  const { addedNewTask } = todoContext;
+  const { addedNewTask } = taskContext;
 
   return (
     <div className='w-full min-h-screen flex py-[72px]'>
