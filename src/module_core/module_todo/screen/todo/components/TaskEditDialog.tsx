@@ -42,13 +42,13 @@ export function TaskEditDialog() {
 
         <div className='flex items-stretch gap-10'>
           <form
-            data-Task-id={editId}
+            data-task-id={editId}
             onSubmit={e => {
               e.preventDefault();
 
-              if (e.currentTarget.dataset['TaskId']) {
+              if (e.currentTarget.dataset['taskId']) {
                 editTask({
-                  id: parseInt(e.currentTarget.dataset['TaskId']),
+                  id: parseInt(e.currentTarget.dataset['taskId']),
                   title: editFormData.title,
                   description: editFormData.description,
                 });
