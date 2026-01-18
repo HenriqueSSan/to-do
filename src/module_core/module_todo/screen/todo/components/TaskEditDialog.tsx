@@ -1,12 +1,11 @@
 import { Icon } from '@iconify/react';
 import { useRef } from 'react';
-import { useTodos } from '../../../hook/todo.hook';
+import { useTasks } from '../../../hook/task.hook';
 
-export function TodoEditDialog() {
+export function TaskEditDialog() {
   const editFormRef = useRef<HTMLFormElement | null>(null);
-  const todoContext = useTodos();
 
-  const { editId, editTodo, setEditId, editFormData, showEditDialog, setEditFormData, setShowEditDialog } = todoContext;
+  const { editId, editTask, setEditId, editFormData, showEditDialog, setEditFormData, setShowEditDialog } = useTasks();
 
   if (!showEditDialog) return null;
 
@@ -43,13 +42,13 @@ export function TodoEditDialog() {
 
         <div className='flex items-stretch gap-10'>
           <form
-            data-todo-id={editId}
+            data-Task-id={editId}
             onSubmit={e => {
               e.preventDefault();
 
-              if (e.currentTarget.dataset['todoId']) {
-                editTodo({
-                  id: parseInt(e.currentTarget.dataset['todoId']),
+              if (e.currentTarget.dataset['TaskId']) {
+                editTask({
+                  id: parseInt(e.currentTarget.dataset['TaskId']),
                   title: editFormData.title,
                   description: editFormData.description,
                 });
